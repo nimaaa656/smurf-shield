@@ -1,13 +1,9 @@
 import streamlit as st
-
-# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="SMURF-Shield – AI Safety by SMASH SMURFS",
     layout="centered"
 )
 
-# ---------------- CUSTOM THEME (MAROON + BROWN) ----------------
-st.markdown(
     """
     <style>
     .stApp {
@@ -52,18 +48,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------------- HEADER ----------------
 st.title("🛡️ SMURF-Shield")
 st.subheader("AI-powered Deepfake & Impersonation Safety for Smart Cities")
 st.caption("Built by **Team SMASH SMURFS 💙**")
-
-# ---------------- NAV ----------------
 page = st.radio(
     "Navigate",
     ["🏠 Home", "🔍 Check Content", "🛡️ What Should I Do?"]
 )
-
-# ---------------- AI-GENERATED LIKELIHOOD (TEXT) ----------------
 def ai_generated_text_likelihood(text):
     t = text.lower()
     score = 0
@@ -96,8 +87,6 @@ def ai_generated_text_likelihood(text):
         return "🟡 Medium (Suspicious Patterns)"
     else:
         return "🟢 Low (Likely Genuine / Transactional)"
-
-# ---------------- VIDEO AI LIKELIHOOD ----------------
 def ai_generated_video_likelihood(video_file):
     filename = video_file.name.lower()
     score = 0
@@ -114,8 +103,6 @@ def ai_generated_video_likelihood(video_file):
         return "🟡 Medium (Possibly AI-Generated)"
     else:
         return "🟢 Low (Likely Authentic)"
-
-# ---------------- IMPERSONATION INCONSISTENCY ----------------
 def impersonation_inconsistency_score(text):
     t = text.lower()
     score = 0
@@ -138,8 +125,6 @@ def impersonation_inconsistency_score(text):
         score += 1
 
     return score
-
-# ---------------- HOME ----------------
 if page == "🏠 Home":
     st.header("🚨 Why This Matters")
     st.write("""
@@ -162,8 +147,6 @@ if page == "🏠 Home":
     st.caption(
         "Developed by **Team SMASH SMURFS** "
     )
-
-# ---------------- CHECK CONTENT ----------------
 elif page == "🔍 Check Content":
     st.header("🔍 Check Suspicious Content")
 
@@ -243,8 +226,6 @@ elif page == "🔍 Check Content":
                 "SMURF-Shield provides **likelihood-based risk assessment**, "
                 "not absolute judgments."
             )
-
-# ---------------- SAFETY ----------------
 elif page == "🛡️ What Should I Do?":
     st.header("🛡️ Citizen Safety Guidance")
 
@@ -267,3 +248,4 @@ elif page == "🛡️ What Should I Do?":
         "SMURF-Shield is a decision-support system. "
         "Final judgment always remains with humans."
     )
+
