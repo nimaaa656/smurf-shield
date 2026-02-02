@@ -1,9 +1,13 @@
 import streamlit as st
+
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="SMURF-Shield – AI Safety by SMASH SMURFS",
     layout="centered"
 )
 
+# ---------------- CUSTOM CSS ----------------
+st.markdown(
     """
     <style>
     .stApp {
@@ -20,7 +24,6 @@ st.set_page_config(
         color: black !important;
     }
 
-    /* ANALYSE BUTTON */
     .stButton>button {
         background-color: #8b4513; /* BROWN */
         color: white;
@@ -48,13 +51,18 @@ st.set_page_config(
     unsafe_allow_html=True
 )
 
+# ---------------- TITLE ----------------
 st.title("🛡️ SMURF-Shield")
 st.subheader("AI-powered Deepfake & Impersonation Safety for Smart Cities")
 st.caption("Built by **Team SMASH SMURFS 💙**")
+
+# ---------------- NAVIGATION ----------------
 page = st.radio(
     "Navigate",
     ["🏠 Home", "🔍 Check Content", "🛡️ What Should I Do?"]
 )
+
+# ---------------- LOGIC FUNCTIONS ----------------
 def ai_generated_text_likelihood(text):
     t = text.lower()
     score = 0
@@ -87,6 +95,8 @@ def ai_generated_text_likelihood(text):
         return "🟡 Medium (Suspicious Patterns)"
     else:
         return "🟢 Low (Likely Genuine / Transactional)"
+
+
 def ai_generated_video_likelihood(video_file):
     filename = video_file.name.lower()
     score = 0
@@ -103,6 +113,8 @@ def ai_generated_video_likelihood(video_file):
         return "🟡 Medium (Possibly AI-Generated)"
     else:
         return "🟢 Low (Likely Authentic)"
+
+
 def impersonation_inconsistency_score(text):
     t = text.lower()
     score = 0
@@ -117,6 +129,7 @@ def impersonation_inconsistency_score(text):
         "on by", "helps lines", "linked to vpa.",
         "credited to a/c", "upi ref no ("
     ]
+
     for p in weird_phrases:
         if p in t:
             score += 1
@@ -125,28 +138,29 @@ def impersonation_inconsistency_score(text):
         score += 1
 
     return score
+
+# ---------------- PAGES ----------------
 if page == "🏠 Home":
     st.header("🚨 Why This Matters")
     st.write("""
     In smart cities, **deepfakes and impersonation scams** can cause:
-    - Financial loss
-    - Public panic
-    - Loss of trust in digital systems
+    - Financial loss  
+    - Public panic  
+    - Loss of trust in digital systems  
     """)
 
     st.header("💡 Our Solution")
     st.write("""
     **SMURF-Shield** evaluates:
-    - AI-generated likelihood
-    - Message intent
-    - Impersonation inconsistencies
-    - Risk to citizens
+    - AI-generated likelihood  
+    - Message intent  
+    - Impersonation inconsistencies  
+    - Risk to citizens  
     """)
 
     st.markdown("---")
-    st.caption(
-        "Developed by **Team SMASH SMURFS** "
-    )
+    st.caption("Developed by **Team SMASH SMURFS**")
+
 elif page == "🔍 Check Content":
     st.header("🔍 Check Suspicious Content")
 
@@ -176,6 +190,7 @@ elif page == "🔍 Check Content":
 
             if text:
                 t = text.lower()
+
                 st.write(
                     f"**Text AI-Generated Likelihood:** "
                     f"{ai_generated_text_likelihood(text)}"
@@ -217,35 +232,35 @@ elif page == "🔍 Check Content":
 
                 if impersonation_score >= 3:
                     st.warning(
-                        "This message imitates a legitimate bank alert but "
-                        "contains inconsistencies typical of impersonation scams."
+                        "This message imitates a legitimate bank alert "
+                        "but contains inconsistencies typical of scams."
                     )
 
             st.subheader("📖 Explanation")
             st.write(
-                "SMURF-Shield provides **likelihood-based risk assessment**, "
+                "SMURF-Shield provides **likelihood-based assessment**, "
                 "not absolute judgments."
             )
+
 elif page == "🛡️ What Should I Do?":
     st.header("🛡️ Citizen Safety Guidance")
 
     st.markdown("""
     ### 🔴 High Risk
-    - Do not respond or share
-    - Do not call numbers in the message
-    - Verify via official apps or websites
+    - Do not respond or share  
+    - Do not call numbers in the message  
+    - Verify via official apps or websites  
 
     ### 🟡 Medium Risk
-    - Be cautious
-    - Cross-check information
+    - Be cautious  
+    - Cross-check information  
 
     ### 🟢 Low Risk
-    - Likely safe
-    - Still verify before acting
+    - Likely safe  
+    - Still verify before acting  
     """)
 
     st.info(
         "SMURF-Shield is a decision-support system. "
-        "Final judgment always remains with humans."
+        "Final judgment remains with humans."
     )
-
